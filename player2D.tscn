@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://dxrfwxac6rqq0"]
+
+[ext_resource type="Script" uid="uid://bwv8q8aj2xm1q" path="res://player2D.gd" id="1_ggmb5"]
+[ext_resource type="Texture2D" uid="uid://doyic74t6anpn" path="res://bug-still img1.png" id="2_am3gd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yh2en"]
+atlas = ExtResource("2_am3gd")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ggmb5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yh2en")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ggmb5"]
+size = Vector2(20, 9)
+
+[node name="Node2D" type="CharacterBody2D" unique_id=675435585]
+position = Vector2(8, 3)
+script = ExtResource("1_ggmb5")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=763578036]
+position = Vector2(4, 3)
+sprite_frames = SubResource("SpriteFrames_ggmb5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=72368163]
+position = Vector2(4, 3.5)
+shape = SubResource("RectangleShape2D_ggmb5")
+
+[node name="CurlTimer" type="Timer" parent="." unique_id=975086148]
+
+[node name="CooldownTimer" type="Timer" parent="." unique_id=1757057594]
