@@ -1,9 +1,11 @@
 [gd_scene format=3 uid="uid://b68rigwov7fdf"]
 
 [ext_resource type="Script" uid="uid://b4tv8bpgud5br" path="res://spawn_logic.gd" id="1_fldcc"]
+[ext_resource type="PackedScene" uid="uid://cuwets7ggroug" path="res://foot_hazard.tscn" id="2_s68ig"]
 
 [node name="ShoeSpawner" type="Node2D" unique_id=6032976]
 script = ExtResource("1_fldcc")
+foot_hazard_scene = ExtResource("2_s68ig")
 floor_y = null
 
 [node name="HazardTimer" type="Timer" parent="." unique_id=490881763]

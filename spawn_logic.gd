@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var foot_hazard_scene: PackedScene
-@export var floor_y = 240.0
+@export var floor_y: float = 240.0
 @onready var hazard_timer: Timer = $HazardTimer
 
 var survival_time =  0.0
@@ -89,14 +89,15 @@ func _on_hazard_timer_timeout() -> void:
 	for x_pos in spawn_positions:
 		instantiate_foot(x_pos)
 		
-func instantiate_foot(pos_x: float) -> void:
-	var hazard := foot_hazard_scene.instantiate()
-	hazard.global_position.x = Vector2(pos_x, floor_y)
+func instantiate_foot(spawn_x: float) -> void:
+	var hazard = foot_hazard_scene.instantiate()
+	hazard.global_position = Vector2(spawn_x, floor_y)  # Must take exactly 2 arguments (x and y)
+	get_parent().add_child(hazard)
 	
 	if "telegraph_time" in hazard:
 		hazard.telegraph_time = telegraph_duration
 	
-		get_parent().add_child(hazard)	
+
 		
 	
 	

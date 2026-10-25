@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dehqrnnwc5rgg"]
+
+[ext_resource type="Script" uid="uid://bgvtipp7qij5h" path="res://chair.gd" id="1_58eu7"]
+[ext_resource type="Texture2D" uid="uid://blvf5387m4epg" path="res://chair.png" id="1_knj3a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_24m23"]
+size = Vector2(29, 14)
+
+[node name="Chair" type="Area2D" unique_id=19315024 groups=["chair"]]
+script = ExtResource("1_58eu7")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=972195234]
+z_index = 1
+texture = ExtResource("1_knj3a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=89532958]
+position = Vector2(-1, -5)
+shape = SubResource("RectangleShape2D_24m23")

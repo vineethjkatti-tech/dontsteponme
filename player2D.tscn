@@ -108,7 +108,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ggmb5"]
 size = Vector2(30, 13)
 
-[node name="Node2D" type="CharacterBody2D" unique_id=675435585]
+[node name="Node2D" type="CharacterBody2D" unique_id=675435585 groups=["player"]]
 position = Vector2(8, 3)
 script = ExtResource("1_ggmb5")
 

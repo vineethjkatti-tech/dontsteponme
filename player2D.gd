@@ -75,3 +75,25 @@ func cooldown_timer_timeout() -> void:
 	print("Cooldown over! Can curl again.")
 	can_curl = true
 	modulate = Color(1.0, 1.0, 1.0)
+	
+func take_hit(_hazard_x: float) -> void:
+	if is_curled:
+		# survived the stomp by being curled up!
+		print("Armored! Survived the stomp.")
+		# tiny camera shake or squash flash
+		var tween := create_tween()
+		tween.tween_property(sprite_2d, "modulate", Color(1.5, 1.5, 1.5), 0.08)
+		tween.tween_property(sprite_2d, "modulate", Color(1.0, 1.0, 1.0), 0.08)
+	else:
+		# flattened / Game Over
+		print("Squashed! Game Over.")
+		set_physics_process(false)
+		
+		# squish visual
+		var death_tween := create_tween()
+		death_tween.tween_property(sprite_2d, "scale:y", 0.1, 0.1)
+		death_tween.tween_callback(func():
+			# Reload scene after 1 second
+			await get_tree().create_timer(1.0).timeout
+			get_tree().reload_current_scene()
+		)

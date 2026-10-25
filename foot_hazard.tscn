@@ -1,9 +1,23 @@
 [gd_scene format=3 uid="uid://cuwets7ggroug"]
 
-[node name="FootHazard" type="Node2D" unique_id=99947470]
+[ext_resource type="Texture2D" uid="uid://c5dc2ih1sxc5r" path="res://shadow-png.png" id="1_b0gcl"]
+[ext_resource type="Script" uid="uid://duobnmao83i8p" path="res://foot_hazard.gd" id="1_yg1cj"]
+[ext_resource type="Texture2D" uid="uid://1lhr2fqr18hh" path="res://boot2.png" id="2_yg1cj"]
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=285994531]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_djjye"]
+size = Vector2(76, 20)
 
-[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=730013207]
+[node name="FootHazard" type="Area2D" unique_id=2132776443]
+script = ExtResource("1_yg1cj")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=925266151]
+[node name="ShadowSprite" type="Sprite2D" parent="." unique_id=285994531]
+texture = ExtResource("1_b0gcl")
+
+[node name="BootSprite" type="Sprite2D" parent="." unique_id=730013207]
+z_index = 2
+texture = ExtResource("2_yg1cj")
+
+[node name="HitBox" type="CollisionShape2D" parent="." unique_id=925266151]
+position = Vector2(3, 17)
+shape = SubResource("RectangleShape2D_djjye")
+disabled = true
