@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://nl5imoolndoh"]
+
+[ext_resource type="Script" uid="uid://be55yeuffnunr" path="res://scene_transition.gd" id="1_gbkcp"]
+[ext_resource type="Shader" uid="uid://biql7ssvf52in" path="res://scene_transition.gdshader" id="1_jiq3i"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hewpr"]
+shader = ExtResource("1_jiq3i")
+shader_parameter/progress = 0.0
+shader_parameter/diamond_pixel_size = 16.0
+
+[node name="SceneTransition" type="CanvasLayer" unique_id=1839372763]
+script = ExtResource("1_gbkcp")
+
+[node name="TransitionOverlay" type="ColorRect" parent="." unique_id=830798097]
+material = SubResource("ShaderMaterial_hewpr")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

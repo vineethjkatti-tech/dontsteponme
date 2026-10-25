@@ -4,6 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://dxrfwxac6rqq0" path="res://player2D.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://b68rigwov7fdf" path="res://shoe_spawner.tscn" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://dehqrnnwc5rgg" path="res://chair.tscn" id="4_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://y366h7e46qxl" path="res://game_over_screen.tscn" id="5_lquwl"]
+[ext_resource type="PackedScene" uid="uid://1jfudbi4yvii" path="res://hud.tscn" id="6_7mycd"]
+[ext_resource type="AudioStream" uid="uid://opn68px7gdtf" path="res://white_records-byte-blast-8-bit-arcade-music-background-music-for-video-208780.mp3" id="7_272bh"]
 
 [node name="Main" type="Node2D" unique_id=1555962016]
 
@@ -18,3 +21,13 @@ position = Vector2(240, -30)
 [node name="ShoeSpawner" parent="." unique_id=6032976 instance=ExtResource("3_h2yge")]
 
 [node name="Chair" parent="." unique_id=19315024 instance=ExtResource("4_1bvp3")]
+position = Vector2(300, 150)
+
+[node name="GameOverScreen" parent="." unique_id=1913943563 instance=ExtResource("5_lquwl")]
+
+[node name="HUD" parent="." unique_id=1763401704 instance=ExtResource("6_7mycd")]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1421518759]
+stream = ExtResource("7_272bh")
+volume_db = -8.0
+autoplay = true

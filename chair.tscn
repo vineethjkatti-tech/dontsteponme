@@ -4,15 +4,17 @@
 [ext_resource type="Texture2D" uid="uid://blvf5387m4epg" path="res://chair.png" id="1_knj3a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_24m23"]
-size = Vector2(29, 14)
+size = Vector2(60.5, 51)
 
 [node name="Chair" type="Area2D" unique_id=19315024 groups=["chair"]]
 script = ExtResource("1_58eu7")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=972195234]
 z_index = 1
+position = Vector2(15, 18)
+scale = Vector2(1.75, 1.75)
 texture = ExtResource("1_knj3a")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=89532958]
-position = Vector2(-1, -5)
+position = Vector2(14.75, 22.5)
 shape = SubResource("RectangleShape2D_24m23")

@@ -6,6 +6,6 @@
 [node name="ShoeSpawner" type="Node2D" unique_id=6032976]
 script = ExtResource("1_fldcc")
 foot_hazard_scene = ExtResource("2_s68ig")
-floor_y = null
+floor_y = 200.0
 
 [node name="HazardTimer" type="Timer" parent="." unique_id=490881763]

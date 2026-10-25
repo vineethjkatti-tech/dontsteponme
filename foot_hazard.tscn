@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://1lhr2fqr18hh" path="res://boot2.png" id="2_yg1cj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_djjye"]
-size = Vector2(76, 20)
+size = Vector2(68, 56)
 
 [node name="FootHazard" type="Area2D" unique_id=2132776443]
 script = ExtResource("1_yg1cj")
@@ -18,6 +18,6 @@ z_index = 2
 texture = ExtResource("2_yg1cj")
 
 [node name="HitBox" type="CollisionShape2D" parent="." unique_id=925266151]
-position = Vector2(3, 17)
+position = Vector2(2, 3)
 shape = SubResource("RectangleShape2D_djjye")
 disabled = true

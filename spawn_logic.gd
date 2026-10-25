@@ -49,7 +49,7 @@ func update_difficulty_curve() -> void:
 		spawn_interval = 0.7
 		telegraph_duration = 0.7
 		targeted_chance = 0.75
-		max_simultaneous_drops = randf_range(2, 3)
+		max_simultaneous_drops = randi_range(2, 3)
 	else:
 		spawn_interval = 0.5
 		telegraph_duration = 0.5

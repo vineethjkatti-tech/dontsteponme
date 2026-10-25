@@ -1,6 +1,8 @@
 extends CharacterBody2D
 
-
+var snd_curl: AudioStream = preload("res://jump.wav")
+var snd_squish: AudioStream = preload("res://random.wav")
+ 
 @export var speed = 140.0
 @export var curl_friction = 6.0
 @export var friction = 12.0
@@ -62,6 +64,20 @@ func enter_curl() -> void:
 	can_curl = false
 	is_curled = true 
 	sprite_2d.play("Curling Up")
+	
+	# play armor/curl sound
+	var sfx := AudioStreamPlayer2D.new()
+	sfx.stream = snd_curl
+	sfx.finished.connect(sfx.queue_free)
+	add_child(sfx)
+	sfx.play()
+	
+	# squash wide, then snap into ball:
+	var t := create_tween()
+	t.tween_property(sprite_2d, "scale", Vector2(1.3, 0.7), 0.06).set_trans(Tween.TRANS_QUAD)
+	t.tween_property(sprite_2d, "scale", Vector2(0.9, 1.1), 0.08)
+	t.tween_property(sprite_2d, "scale", Vector2(1.0, 1.0), 0.06)
+	
 	curl_timer.start(1.5)
 	
 func curling_up_timeout() -> void:
@@ -71,6 +87,10 @@ func curling_up_timeout() -> void:
 	modulate = Color(0.6, 0.6, 0.6)
 	cooldown_timer.start(4.0)
 	
+	var t := create_tween()
+	t.tween_property(sprite_2d, "scale", Vector2(0.8, 1.3), 0.08)
+	t.tween_property(sprite_2d, "scale", Vector2(1.0, 1.0), 0.1).set_trans(Tween.TRANS_BOUNCE)
+	
 func cooldown_timer_timeout() -> void:
 	print("Cooldown over! Can curl again.")
 	can_curl = true
@@ -78,22 +98,37 @@ func cooldown_timer_timeout() -> void:
 	
 func take_hit(_hazard_x: float) -> void:
 	if is_curled:
-		# survived the stomp by being curled up!
 		print("Armored! Survived the stomp.")
-		# tiny camera shake or squash flash
-		var tween := create_tween()
-		tween.tween_property(sprite_2d, "modulate", Color(1.5, 1.5, 1.5), 0.08)
-		tween.tween_property(sprite_2d, "modulate", Color(1.0, 1.0, 1.0), 0.08)
+		var flash := create_tween()
+		flash.tween_property(sprite_2d, "modulate", Color(1.8, 1.8, 1.8), 0.08)
+		flash.tween_property(sprite_2d, "modulate", Color(1.0, 1.0, 1.0), 0.08)
 	else:
-		# flattened / Game Over
 		print("Squashed! Game Over.")
 		set_physics_process(false)
 		
-		# squish visual
+		# play splat sound
+		var sfx := AudioStreamPlayer.new()
+		sfx.stream = snd_squish
+		sfx.finished.connect(sfx.queue_free)
+		get_tree().root.add_child(sfx)
+		sfx.play()
+		
+		# squish bug visual
 		var death_tween := create_tween()
-		death_tween.tween_property(sprite_2d, "scale:y", 0.1, 0.1)
-		death_tween.tween_callback(func():
-			# Reload scene after 1 second
-			await get_tree().create_timer(1.0).timeout
-			get_tree().reload_current_scene()
-		)
+		death_tween.tween_property(sprite_2d, "scale:y", 0.12, 0.08)
+		death_tween.tween_property(sprite_2d, "scale:x", 1.4, 0.08)
+		
+		# stop HUD timer and grab final survival time
+		var final_score := 0.0
+		var hud = get_tree().get_first_node_in_group("hud")
+		if not hud:
+			hud = get_parent().get_node_or_null("HUD")
+		if hud and hud.has_method("stop_timer"):
+			final_score = hud.stop_timer()
+		
+		# pass time to GameOverScreen and trigger sequence
+		var game_over_ui = get_tree().get_first_node_in_group("game_over_ui")
+		if game_over_ui and game_over_ui.has_method("show_game_over"):
+			if game_over_ui.has_method("set_final_score"):
+				game_over_ui.set_final_score(final_score)
+			game_over_ui.show_game_over()
