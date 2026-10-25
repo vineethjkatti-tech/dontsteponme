@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://b68rigwov7fdf"]
+
+[ext_resource type="Script" uid="uid://b4tv8bpgud5br" path="res://spawn_logic.gd" id="1_fldcc"]
+
+[node name="ShoeSpawner" type="Node2D" unique_id=6032976]
+script = ExtResource("1_fldcc")
+
+[node name="HazardTimer" type="Timer" parent="." unique_id=490881763]

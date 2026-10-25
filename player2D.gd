@@ -2,51 +2,76 @@ extends CharacterBody2D
 
 
 @export var speed = 140.0
+@export var curl_friction = 6.0
+@export var friction = 12.0
 
 const HALF_WIDTH: float = 10.0
 const SCREEN_WIDTH: float = 472.0
 
 @onready var sprite_2d: AnimatedSprite2D = $Sprite2D
-@onready var curl_timer: Timer = $"../CurlTimer"
-@onready var cooldown_timer: Timer = $"../CooldownTimer"
+@onready var curl_timer: Timer = $CurlTimer
+@onready var cooldown_timer: Timer = $CooldownTimer
 
 var is_curled = false
-var can_curl = false
+var can_curl = true
 
-func _physics_process(delta: float) -> void:
+func _ready() -> void:
+	# .one_shot makes sure the timer doesn't loop
+	curl_timer.one_shot = true
+	cooldown_timer.one_shot = true
 	
-	var direction := Input.get_axis("left", "right")
+# testing what is wrong
+	if not curl_timer.timeout.is_connected(curling_up_timeout):
+		curl_timer.timeout.connect(curling_up_timeout)
+	if not cooldown_timer.timeout.is_connected(cooldown_timer_timeout):
+		cooldown_timer.timeout.connect(cooldown_timer_timeout)
+
+func _physics_process(_delta: float) -> void:
+	
+	if Input.is_action_just_pressed("curl") and can_curl and not is_curled:
+		enter_curl()
 	
 	if is_curled:
 		velocity.x = 0.0
 	else:
-		velocity.x = direction * speed 
+		var direction := Input.get_axis("left", "right")
+		velocity.x = move_toward(velocity.x, 0.0, curl_friction)
+		velocity.x = move_toward(velocity.x, 0, 12)
 		
-
+		if direction != 0.0:
+			sprite_2d.flip_h = (direction < 0.0)
+			sprite_2d.play("Walking")
+		else:
+			velocity.x = move_toward(velocity.x, 0, friction)
+			if velocity.x == 0.0:
+				sprite_2d.play("default")
 			
 		# vertical velocity is zero as our sprite should only move horiontally
 		velocity.y = 0.0
-		
 		move_and_slide()
-		
+
 		# clamping sprite to visible screen
 		global_position.x = clampf(global_position.x, HALF_WIDTH, SCREEN_WIDTH - HALF_WIDTH)
-		
-		
-		if direction < 0:
-			sprite_2d.flip_h = true
-		elif direction > 0:
-			sprite_2d.flip_h = false
-		
-
+	
 		if Input.is_action_just_pressed("curl") and can_curl and not is_curled:
 			enter_curl()
 			
-			
 # function to perform a curl while space is presses
 func enter_curl() -> void:
+	print("Entered curl")
 	can_curl = false
 	is_curled = true 
-	# Call the animation here
+	sprite_2d.play("Curling Up")
 	curl_timer.start(1.5)
 	
+func curling_up_timeout() -> void:
+	print("Curl finished! Starting 4s cooldown...")
+	is_curled = false
+	sprite_2d.play("default")
+	modulate = Color(0.6, 0.6, 0.6)
+	cooldown_timer.start(4.0)
+	
+func cooldown_timer_timeout() -> void:
+	print("Cooldown over! Can curl again.")
+	can_curl = true
+	modulate = Color(1.0, 1.0, 1.0)

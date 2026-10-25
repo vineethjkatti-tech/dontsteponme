@@ -2,6 +2,24 @@
 
 [ext_resource type="Script" uid="uid://bwv8q8aj2xm1q" path="res://player2D.gd" id="1_ggmb5"]
 [ext_resource type="Texture2D" uid="uid://doyic74t6anpn" path="res://bug-still img1.png" id="2_am3gd"]
+[ext_resource type="Texture2D" uid="uid://sc1ts05amnfr" path="res://curling_up/bug-curlingup1.png" id="2_rv2vr"]
+[ext_resource type="Texture2D" uid="uid://d0e85gimrh8my" path="res://curling_up/bug-curlingup2.png" id="3_3341y"]
+[ext_resource type="Texture2D" uid="uid://3ithgk6c47tf" path="res://curling_up/bug-curlingup3.png" id="4_unp6d"]
+[ext_resource type="Texture2D" uid="uid://dyvluv1wdxfqg" path="res://curling_up/bug-curlingup4.png" id="5_kdjrl"]
+[ext_resource type="Texture2D" uid="uid://es5sw5c41eed" path="res://curling_up/bug-curlingup5.png" id="6_7x6r1"]
+[ext_resource type="Texture2D" uid="uid://bvuom7cqix73a" path="res://curling_up/bug-curlingup6.png" id="7_ap18s"]
+[ext_resource type="Texture2D" uid="uid://dpdtk3h8kwlfc" path="res://curling_up/bug-curlingup7.png" id="8_ffssk"]
+[ext_resource type="Texture2D" uid="uid://gfr57tcjp0lv" path="res://curling_up/bug-curlingup8.png" id="9_lclin"]
+[ext_resource type="Texture2D" uid="uid://conpkv7sb17dq" path="res://curling_up/bug-curlingup9.png" id="10_tq4fo"]
+[ext_resource type="Texture2D" uid="uid://bografbhl5ltp" path="res://curling_up/bug-curlingup10.png" id="11_68hwn"]
+[ext_resource type="Texture2D" uid="uid://5s8qd1kei23m" path="res://running/bug-run-animation1.png" id="12_378nc"]
+[ext_resource type="Texture2D" uid="uid://dmxppua1yavah" path="res://running/bug-run-animation2.png" id="13_54xqx"]
+[ext_resource type="Texture2D" uid="uid://cektdfxddaj80" path="res://running/bug-run-animation3.png" id="14_y3ey5"]
+[ext_resource type="Texture2D" uid="uid://c7ykb5b1xshmf" path="res://running/bug-run-animation4.png" id="15_0vpwh"]
+[ext_resource type="Texture2D" uid="uid://csq60wg3e0jwp" path="res://walking/bug-walking-animation1.png" id="16_77qbf"]
+[ext_resource type="Texture2D" uid="uid://bposu7cdp8u18" path="res://walking/bug-walking-animation2.png" id="17_yvdge"]
+[ext_resource type="Texture2D" uid="uid://rkykieynfae4" path="res://walking/bug-walking-animation3.png" id="18_ten13"]
+[ext_resource type="Texture2D" uid="uid://brs66nyp7d7un" path="res://walking/bug-walking-animation4.png" id="19_6spnt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yh2en"]
 atlas = ExtResource("2_am3gd")
@@ -9,6 +27,75 @@ region = Rect2(0, 0, 24, 24)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ggmb5"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_rv2vr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_3341y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_unp6d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_kdjrl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_7x6r1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ap18s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ffssk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_lclin")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_tq4fo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_68hwn")
+}],
+"loop": 0,
+"name": &"Curling Up",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_378nc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_54xqx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_y3ey5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_0vpwh")
+}],
+"loop": 1,
+"name": &"Running",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_77qbf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_yvdge")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_ten13")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_6spnt")
+}],
+"loop": 1,
+"name": &"Walking",
+"speed": 8.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_yh2en")
@@ -25,14 +112,18 @@ size = Vector2(20, 9)
 position = Vector2(8, 3)
 script = ExtResource("1_ggmb5")
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=763578036]
-position = Vector2(4, 3)
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=810032975]
+position = Vector2(4, 232)
 sprite_frames = SubResource("SpriteFrames_ggmb5")
+animation = &"Running"
+frame_progress = 0.5405594
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=72368163]
-position = Vector2(4, 3.5)
+position = Vector2(4, 232.5)
 shape = SubResource("RectangleShape2D_ggmb5")
 
 [node name="CurlTimer" type="Timer" parent="." unique_id=975086148]
 
 [node name="CooldownTimer" type="Timer" parent="." unique_id=1757057594]
+wait_time = 4.0
+one_shot = true
