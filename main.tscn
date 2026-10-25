@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://7bxyqlbyxowb"]
+
+[ext_resource type="Texture2D" uid="uid://cckmet8dpdk08" path="res://back-Ground.png" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://dxrfwxac6rqq0" path="res://player2D.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://b68rigwov7fdf" path="res://shoe_spawner.tscn" id="3_h2yge"]
+
+[node name="Main" type="Node2D" unique_id=1555962016]
+
+[node name="BackGround" type="Sprite2D" parent="." unique_id=283878354]
+z_index = -1
+texture = ExtResource("1_ig7tw")
+centered = false
+
+[node name="Node2D" parent="." unique_id=675435585 instance=ExtResource("2_0xm2m")]
+position = Vector2(240, -30)
+
+[node name="ShoeSpawner" parent="." unique_id=6032976 instance=ExtResource("3_h2yge")]

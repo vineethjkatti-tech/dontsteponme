@@ -32,13 +32,13 @@ func _physics_process(_delta: float) -> void:
 		enter_curl()
 	
 	if is_curled:
-		velocity.x = 0.0
+		velocity.x = move_toward(velocity.x, 0.0, curl_friction)
 	else:
 		var direction := Input.get_axis("left", "right")
-		velocity.x = move_toward(velocity.x, 0.0, curl_friction)
-		velocity.x = move_toward(velocity.x, 0, 12)
+		
 		
 		if direction != 0.0:
+			velocity.x = direction * speed
 			sprite_2d.flip_h = (direction < 0.0)
 			sprite_2d.play("Walking")
 		else:
