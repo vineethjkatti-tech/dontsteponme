@@ -47,4 +47,10 @@ func set_final_score(time_survived: float) -> void:
 	# If you add a ScoreResult label inside GameOverScreen's VBoxContainer:
 	var result_lbl = get_node_or_null("CenterContainer/VBoxContainer/ScoreResult")
 	if result_lbl:
-		result_lbl.text = "TIME: " + time_str
+		var current_str = Sessiondata.format_time(time_survived)
+		var best_str = Sessiondata.format_time(Sessiondata.session_best)
+		
+		if time_survived >= Sessiondata.session_best:
+			result_lbl.text = "NEW SESSION RECORD!\n%s" % current_str
+		else:
+			result_lbl.text = "TIME: %s\nBEST: %s" % [current_str, best_str]

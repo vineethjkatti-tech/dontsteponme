@@ -50,3 +50,26 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.99607843, 0.99607843, 0.99607843, 1)
 theme_override_font_sizes/font_size = 16
 text = "Survived: 00:00:0"
+
+[node name="TopRightMargin" type="MarginContainer" parent="." unique_id=735987766]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -1.0
+offset_bottom = 16.0
+grow_horizontal = 0
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 12
+
+[node name="HighScorePanel" type="PanelContainer" parent="TopRightMargin" unique_id=229079837]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TopRightMargin/HighScorePanel" unique_id=1097564581]
+layout_mode = 2
+
+[node name="HighScoreLabel" type="Label" parent="TopRightMargin/HighScorePanel/MarginContainer" unique_id=959723476]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.8, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Best: 00:00:0"
