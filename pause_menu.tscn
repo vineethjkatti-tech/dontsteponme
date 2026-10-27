@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://dpcxssnxagwrm"]
+
+[ext_resource type="Script" uid="uid://bqk605ca7vdx3" path="res://pause_menu.gd" id="1_hdmo1"]
+
+[node name="PauseMenu" type="CanvasLayer" unique_id=1390396286]
+process_mode = 3
+script = ExtResource("1_hdmo1")
+
+[node name="Control" type="Control" parent="." unique_id=144781306]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dimmer" type="ColorRect" parent="Control" unique_id=1641420261]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5882353)
+
+[node name="CenterContainer" type="CenterContainer" parent="Control/Dimmer" unique_id=1950706512]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Dimmer/CenterContainer" unique_id=636698517]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="Control/Dimmer/CenterContainer/VBoxContainer" unique_id=1737484778]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.73333335, 0, 0.09803922, 1)
+theme_override_font_sizes/font_size = 26
+text = "Paused.."
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="Control/Dimmer/CenterContainer/VBoxContainer" unique_id=2635300]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="ResumeButton" type="Button" parent="Control/Dimmer/CenterContainer/VBoxContainer" unique_id=1572317943]
+layout_mode = 2
+text = "Resume"
+flat = true
+
+[node name="RestartButton" type="Button" parent="Control/Dimmer/CenterContainer/VBoxContainer" unique_id=341858665]
+layout_mode = 2
+text = "Restart"
+flat = true
+
+[node name="MenuButton" type="Button" parent="Control/Dimmer/CenterContainer/VBoxContainer" unique_id=1079222764]
+layout_mode = 2
+text = "Main menu"
+flat = true

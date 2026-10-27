@@ -17,14 +17,19 @@ func _ready() -> void:
 	menu_button.pressed.connect(_on_menu_pressed)
 
 func show_game_over() -> void:
+	# mute all sfx audio when game is over
+	var sfx_index := AudioServer.get_bus_index("SFX")
+	if sfx_index != -1:
+		AudioServer.set_bus_mute(sfx_index, true)
+	
 	print("--- show_game_over() CALLED! ---")
 	menu_container.mouse_filter = Control.MOUSE_FILTER_STOP
 	
-	# Dim the background
+	# dim the background
 	var dim_tween := create_tween()
 	dim_tween.tween_property(dimmer, "modulate:a", 0.75, 0.8).set_trans(Tween.TRANS_SINE)
 	
-	# Fade in the menu
+	# fade in the menu
 	var fade_tween := create_tween()
 	fade_tween.tween_property(menu_container, "modulate:a", 1.0, 0.6).set_delay(0.2).set_trans(Tween.TRANS_CUBIC)
 	
@@ -32,9 +37,17 @@ func show_game_over() -> void:
 	retry_button.grab_focus()
 
 func _on_retry_pressed() -> void:
+	# unmute all SFX audio before restarting the game
+	var sfx_index = AudioServer.get_bus_index("SFX")
+	if sfx_index != -1:
+		AudioServer.set_bus_mute(sfx_index, false)
 	get_tree().reload_current_scene()
 
 func _on_menu_pressed() -> void:
+	# unmute sfx bus when going to main menu
+	var sfx_index = AudioServer.get_bus_index("SFX")
+	if sfx_index != -1:
+		AudioServer.set_bus_mute(sfx_index, false) 
 	get_tree().change_scene_to_file("res://control.tscn")
 
 func set_final_score(time_survived: float) -> void:

@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://y366h7e46qxl" path="res://game_over_screen.tscn" id="5_lquwl"]
 [ext_resource type="PackedScene" uid="uid://1jfudbi4yvii" path="res://hud.tscn" id="6_7mycd"]
 [ext_resource type="AudioStream" uid="uid://opn68px7gdtf" path="res://white_records-byte-blast-8-bit-arcade-music-background-music-for-video-208780.mp3" id="7_272bh"]
+[ext_resource type="PackedScene" uid="uid://dpcxssnxagwrm" path="res://pause_menu.tscn" id="8_5vw27"]
 
 [node name="Main" type="Node2D" unique_id=1555962016]
 
@@ -25,9 +26,14 @@ position = Vector2(300, 150)
 
 [node name="GameOverScreen" parent="." unique_id=1913943563 instance=ExtResource("5_lquwl")]
 
-[node name="HUD" parent="." unique_id=1763401704 instance=ExtResource("6_7mycd")]
-
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1421518759]
 stream = ExtResource("7_272bh")
 volume_db = -8.0
 autoplay = true
+bus = &"Music"
+
+[node name="HUDLayer" type="CanvasLayer" parent="." unique_id=1432009987]
+
+[node name="HUD" parent="HUDLayer" unique_id=1763401704 instance=ExtResource("6_7mycd")]
+
+[node name="PauseMenu" parent="." unique_id=1390396286 instance=ExtResource("8_5vw27")]

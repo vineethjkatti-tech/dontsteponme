@@ -26,6 +26,7 @@ func break_chair() -> void:
 	# play shatter sound
 	var sfx := AudioStreamPlayer2D.new()
 	sfx.stream = snd_break
+	sfx.bus = "SFX"
 	sfx.finished.connect(sfx.queue_free)
 	add_child(sfx)
 	sfx.play()

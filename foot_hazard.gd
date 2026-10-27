@@ -54,6 +54,7 @@ func trigger_impact() -> void:
 	# play stomp sound
 	var player := AudioStreamPlayer2D.new()
 	player.stream = snd_stomp
+	player.bus = "SFX"
 	player.finished.connect(player.queue_free)
 	add_child(player)
 	player.play()

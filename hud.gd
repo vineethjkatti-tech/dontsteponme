@@ -6,7 +6,7 @@ extends Control
 var elapsed_time: float = 0.0
 var is_active: bool = true
 
-func ready() -> void:
+func _ready() -> void:
 	add_to_group("hud")
 	high_score_label.text = "Best: %s" % Sessiondata.format_time(Sessiondata.session_best)
 

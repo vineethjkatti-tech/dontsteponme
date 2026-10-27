@@ -68,6 +68,7 @@ func enter_curl() -> void:
 	# play armor/curl sound
 	var sfx := AudioStreamPlayer2D.new()
 	sfx.stream = snd_curl
+	sfx.bus = "SFX"
 	sfx.finished.connect(sfx.queue_free)
 	add_child(sfx)
 	sfx.play()
@@ -109,6 +110,7 @@ func take_hit(_hazard_x: float) -> void:
 		# play splat sound
 		var sfx := AudioStreamPlayer.new()
 		sfx.stream = snd_squish
+		sfx.bus = "SFX"
 		sfx.finished.connect(sfx.queue_free)
 		get_tree().root.add_child(sfx)
 		sfx.play()
