@@ -9,6 +9,7 @@ shader_parameter/progress = 0.0
 shader_parameter/diamond_pixel_size = 16.0
 
 [node name="SceneTransition" type="CanvasLayer" unique_id=1839372763]
+layer = 100
 script = ExtResource("1_gbkcp")
 
 [node name="TransitionOverlay" type="ColorRect" parent="." unique_id=830798097]

@@ -59,3 +59,9 @@ flat = true
 layout_mode = 2
 text = "Main menu"
 flat = true
+
+[node name="Cursor" type="Label" parent="." unique_id=1327237892]
+modulate = Color(1, 0.26666668, 0.26666668, 1)
+offset_right = 40.0
+offset_bottom = 16.0
+text = ">"

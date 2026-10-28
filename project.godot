@@ -22,6 +22,7 @@ buses/default_bus_layout="uid://chwccrod5pjne"
 [autoload]
 
 Sessiondata="*uid://4yky05bir4ww"
+SceneTransition="*uid://be55yeuffnunr"
 
 [display]
 
