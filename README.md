@@ -16,7 +16,5 @@ Use the stool that **occurs periodically** and **breaks** with just one crush to
 
 You may take is easy at first, but beware!! **the difficulty advance with time played!!**
 
-You can play my game [here!](https://vineethjkatti-tech.itch.io/dont-step-on-me)
-
 The reshipped version for savepoint can be accesed [here!](https://vineethjkatti-tech.itch.io/dontsteponme)
 
