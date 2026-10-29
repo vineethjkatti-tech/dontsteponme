@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://1jfudbi4yvii" path="res://hud.tscn" id="6_7mycd"]
 [ext_resource type="AudioStream" uid="uid://opn68px7gdtf" path="res://white_records-byte-blast-8-bit-arcade-music-background-music-for-video-208780.mp3" id="7_272bh"]
 [ext_resource type="PackedScene" uid="uid://dpcxssnxagwrm" path="res://pause_menu.tscn" id="8_5vw27"]
+[ext_resource type="Script" uid="uid://p8ug6mxogqmr" path="res://camera_2d.gd" id="9_kek77"]
 
 [node name="Main" type="Node2D" unique_id=1555962016]
 
@@ -37,3 +38,7 @@ bus = &"Music"
 [node name="HUD" parent="HUDLayer" unique_id=1763401704 instance=ExtResource("6_7mycd")]
 
 [node name="PauseMenu" parent="." unique_id=1390396286 instance=ExtResource("8_5vw27")]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=287434300]
+position = Vector2(240, 135)
+script = ExtResource("9_kek77")

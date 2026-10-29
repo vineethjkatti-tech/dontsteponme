@@ -51,6 +51,17 @@ func slam_down() -> void:
 	trigger_impact()
 
 func trigger_impact() -> void:
+	# fetch current survival_time from the HUD
+	var current_time: float = 0.0
+	var hud = get_tree().get_first_node_in_group("hud")
+	if hud and "elapsed_time" in hud:
+		current_time = hud.elapsed_time
+		
+	# trigger the camera shake
+	var cam = get_tree().get_first_node_in_group("camera")
+	if cam and cam.has_method("trigger_shoe_shake"):
+		cam.trigger_shoe_shake(current_time)
+		
 	# play stomp sound
 	var player := AudioStreamPlayer2D.new()
 	player.stream = snd_stomp
