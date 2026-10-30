@@ -6,6 +6,7 @@ var snd_squish: AudioStream = preload("res://random.wav")
 @export var speed = 140.0
 @export var curl_friction = 6.0
 @export var friction = 12.0
+@export var boost_multiplier: float = 1.5
 
 const HALF_WIDTH: float = 10.0
 const SCREEN_WIDTH: float = 472.0
@@ -16,6 +17,8 @@ const SCREEN_WIDTH: float = 472.0
 
 var is_curled = false
 var can_curl = true
+var is_boosted: bool = false
+var boost_timer: SceneTreeTimer = null
 
 func _ready() -> void:
 	# .one_shot makes sure the timer doesn't loop
@@ -40,7 +43,9 @@ func _physics_process(_delta: float) -> void:
 		
 		
 		if direction != 0.0:
-			velocity.x = direction * speed
+			# if the player gets a near miss the pseed is multiplied by the multiplier value
+			var current_speed: float = speed * (boost_multiplier if is_boosted else 1.0)
+			velocity.x = direction * current_speed  # <-- FIXED
 			sprite_2d.flip_h = (direction < 0.0)
 			sprite_2d.play("Walking")
 		else:
@@ -134,3 +139,17 @@ func take_hit(_hazard_x: float) -> void:
 			if game_over_ui.has_method("set_final_score"):
 				game_over_ui.set_final_score(final_score)
 			game_over_ui.show_game_over()
+			
+func trigger_adrenaline_boost(duration: float = 1.5) -> void:
+	is_boosted = true
+	
+	# visual effects that flash bright yellow
+	var flash_tween = create_tween()
+	flash_tween.tween_property(sprite_2d, "modulate", Color(0.2, 1.8, 1.8), 0.08)
+	flash_tween.tween_property(sprite_2d, "modulate", Color(1.0, 1.0, 1.0), 0.15)
+	
+	# reset the timer so that the boost stacks
+	boost_timer = get_tree(). create_timer(duration)
+	boost_timer.timeout.connect(func():
+		is_boosted = false
+	)

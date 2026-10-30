@@ -4,11 +4,15 @@ signal hazard_finished
 
 @export var telegraph_time = 1.5
 @export var slam_duration = 0.08
+@export var near_miss_inner_dist: float = 18.0
+@export var near_miss_outer_dist: float = 38.0
 
 # to preload the two boot frames
 var snd_stomp: AudioStream = preload("res://hitHurt.wav")
 var tex_falling: Texture2D = preload("res://boot2.png")
 var tex_slam: Texture2D = preload("res://boot1.png")
+var floating_text_screen: PackedScene = preload("res://floating_text.tscn")
+var player_was_hit = false
 
 @onready var shadow: Sprite2D = $ShadowSprite
 @onready var boot: Sprite2D = $BootSprite
@@ -29,7 +33,7 @@ func _ready() -> void:
 	
 	start_telegraph()
 	
-	start_telegraph()
+
 	
 func start_telegraph() -> void:
 	# 1. Expand and darken shadow
@@ -41,6 +45,42 @@ func start_telegraph() -> void:
 	# Wait for telegraph to complete, then slam down
 	await t.finished
 	slam_down()
+
+func _check_near_miss() -> void:
+	var player = get_tree().get_first_node_in_group("player")
+	if not player or not is_instance_valid(player):
+		print("DEBUG: Player not found in 'player' group!")
+		return
+		
+		# declare the bouds of threshold
+	var boot_half_width: float = 32.0 
+	if hitbox and hitbox.shape is RectangleShape2D:
+		boot_half_width = hitbox.shape.size.x / 2.0
+		
+		# measure edge to edge distance of boot from bug
+	var center_dist = abs(player.global_position.x - hitbox.global_position.x)
+	var edge_dist = center_dist - boot_half_width
+	
+	print("DEBUG: shoe landed, edge distance to bug: ", snappedf(edge_dist, 0.1), "px")
+		
+		
+	if edge_dist >= 0.0 and edge_dist <= 50.0:
+
+			
+		# award the speed boost
+		if player.has_method("trigger_adrenaline_boost"):
+			player.trigger_adrenaline_boost(1.5)
+		else:
+			print("DEBUG: player does not have boost method!")			
+			
+	# spawn the popup right above the bug
+		var popup = floating_text_screen.instantiate()
+		get_parent().add_child(popup)
+		var spawn_pos = player.global_position + Vector2(0, -18.0)
+		popup.setup("Close Call!", spawn_pos)
+	else:
+		print("DEBUG: floating screen is not working!")
+	
 
 func slam_down() -> void:
 	boot.visible = true 
@@ -72,15 +112,16 @@ func trigger_impact() -> void:
 	
 	boot.texture = tex_slam
 	hitbox.disabled = false
+	player_was_hit = false
 	
-	# Wait 2 physics frames so Godot registers the newly enabled hitbox
+	# THIS FUNCTION WAITS FOR SOME TIME TFOR GODOT TO PROCESS THE ANY POSSIBLE HITS, THIS IS VERY IMPORTANT AS THE GAME WONT FUNCTION WITHOUT IT
 	await get_tree().physics_frame
 	await get_tree().physics_frame
 	
 	var overlapping_areas: Array[Area2D] = get_overlapping_areas()
 	var overlapping_bodies: Array[Node2D] = get_overlapping_bodies()
 
-	# 1. Check for chair shelter
+	# check for chair shelter
 	for area in overlapping_areas:
 		if area.is_in_group("chair") or area.has_method("break_chair"):
 			has_hit_chair = true
@@ -89,19 +130,23 @@ func trigger_impact() -> void:
 			print("--- Chair smashed and absorbed impact!")
 			break
 
-	# 2. Check for player hit (only if chair didn't absorb it)
+	# check for player hit (only if chair didn't absorb it)
 	if not has_hit_chair:
 		for body in overlapping_bodies:
 			if body.is_in_group("player") or body.has_method("take_hit"):
 				print("--- Boot hit bug!")
+				player_was_hit = true # <-- 1. SET THE FLAG TRUE HERE
 				body.take_hit(global_position.x)
 				break
+				
+	if not has_hit_chair and not player_was_hit:
+		_check_near_miss()
 
-	# Linger on ground
+	# linger on ground for some time
 	await get_tree().create_timer(0.35).timeout
 	hitbox.disabled = true
 	
-	# Retract back up
+	# retract back up
 	boot.texture = tex_falling
 	var lift_tween := create_tween()
 	lift_tween.tween_property(boot, "position:y", -240.0, 0.25).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)

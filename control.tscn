@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cckmet8dpdk08" path="res://back-Ground.png" id="1_0fbet"]
 [ext_resource type="Script" uid="uid://c0snaeob404jb" path="res://control.gd" id="1_62e2m"]
+[ext_resource type="AudioStream" uid="uid://c5836yim4piw1" path="res://pixelkc-waybound-menu-music-432032.mp3" id="3_qtu10"]
 
 [node name="MainMenu" type="Control" unique_id=406835669]
 layout_mode = 3
@@ -77,3 +78,9 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 16.0
 text = ">"
+
+[node name="MenuMusicPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1863356660]
+stream = ExtResource("3_qtu10")
+volume_db = -5.0
+autoplay = true
+bus = &"Music"
