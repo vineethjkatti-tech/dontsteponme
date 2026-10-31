@@ -71,15 +71,24 @@ func _check_near_miss() -> void:
 		if player.has_method("trigger_adrenaline_boost"):
 			player.trigger_adrenaline_boost(1.5)
 		else:
-			print("DEBUG: player does not have boost method!")			
-			
+			print("DEBUG: player does not have boost method!")
+
 	# spawn the popup right above the bug
 		var popup = floating_text_screen.instantiate()
 		get_parent().add_child(popup)
-		var spawn_pos = player.global_position + Vector2(0, -18.0)
+		
+		# use sprite's glob pos instead of fixed value!!
+		var sprite = player.get_node_or_null("Sprite2D")
+		var spawn_pos = (sprite.global_position if sprite else player.global_position) + Vector2(0, -18.0)
+
+		
 		popup.setup("Close Call!", spawn_pos)
-	else:
-		print("DEBUG: floating screen is not working!")
+		
+		# After popup.setup() call:
+		print("  Popup instantiated: ", popup)
+		print("  Popup parent: ", popup.get_parent())
+		print("  Popup in tree: ", popup.is_inside_tree())
+
 	
 
 func slam_down() -> void:

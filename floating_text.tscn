@@ -8,7 +8,7 @@ script = ExtResource("1_58iww")
 [node name="Label" type="Label" parent="." unique_id=1118321831]
 offset_right = 40.0
 offset_bottom = 16.0
-theme_override_colors/font_color = Color(0.73333335, 0, 0.09803922, 1)
+theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_font_sizes/font_size = 10
 text = "Close Call"
 horizontal_alignment = 1

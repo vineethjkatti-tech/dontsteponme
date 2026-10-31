@@ -145,7 +145,7 @@ func trigger_adrenaline_boost(duration: float = 1.5) -> void:
 	
 	# visual effects that flash bright yellow
 	var flash_tween = create_tween()
-	flash_tween.tween_property(sprite_2d, "modulate", Color(0.2, 1.8, 1.8), 0.08)
+	flash_tween.tween_property(sprite_2d, "modulate", Color(1.0, 0.722, 0.0), 0.08)
 	flash_tween.tween_property(sprite_2d, "modulate", Color(1.0, 1.0, 1.0), 0.15)
 	
 	# reset the timer so that the boost stacks

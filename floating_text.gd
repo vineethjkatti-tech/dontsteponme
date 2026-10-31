@@ -9,6 +9,21 @@ func setup(text_content = "Close Call", start_pos: Vector2 = Vector2.ZERO):
 	label.text = text_content
 	label.modulate = Color(1.0, 0.9, 0.2, 1.0)
 	
+	label.add_theme_color_override("font_color", Color(1, 1, 0))  # Force yellow
+	label.add_theme_font_size_override("font_size", 24)  # Force readable size
+	
+	print("=== FLOATING TEXT DEBUG ===")
+	print("  global_position: ", global_position)
+	print("  label.text: ", label.text)
+	print("  label.size: ", label.size)
+	print("  label.visible: ", label.visible)
+	print("  self.visible: ", visible)
+	print("  parent: ", get_parent())
+	print("  z_index: ", z_index)
+	print("  scale before tween: ", scale)
+	
+	label.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
+	
 	# anchors
 	label.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
 	label.position = -label.size / 2.0
@@ -27,6 +42,7 @@ func setup(text_content = "Close Call", start_pos: Vector2 = Vector2.ZERO):
 	
 	t.chain().tween_callback(queue_free)
 	
+	print("  Tween created, is_valid: ", t.is_valid())
 	
 	
 	
