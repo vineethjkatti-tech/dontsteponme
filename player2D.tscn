@@ -106,7 +106,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ggmb5"]
-size = Vector2(30, 13)
+size = Vector2(25, 10)
 
 [node name="Node2D" type="CharacterBody2D" unique_id=675435585 groups=["player"]]
 position = Vector2(8, 3)
@@ -114,13 +114,12 @@ script = ExtResource("1_ggmb5")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=810032975]
 position = Vector2(9.5, 226.5)
-scale = Vector2(1.4583334, 1.4583334)
 sprite_frames = SubResource("SpriteFrames_ggmb5")
 animation = &"Running"
 frame_progress = 0.5405594
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=72368163]
-position = Vector2(10, 227.5)
+position = Vector2(9, 227)
 shape = SubResource("RectangleShape2D_ggmb5")
 
 [node name="CurlTimer" type="Timer" parent="." unique_id=975086148]

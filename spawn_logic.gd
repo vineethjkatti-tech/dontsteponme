@@ -31,10 +31,10 @@ func _process(_delta: float) -> void:
 	
 func update_difficulty_curve() -> void:
 	if survival_time < 15.0:
-		spawn_interval = 2.2
-		telegraph_duration = 1.8
-		targeted_chance = 0.0
-		max_simultaneous_drops = 1
+		spawn_interval = 1.9
+		telegraph_duration = 1.5
+		targeted_chance = 0.1
+		max_simultaneous_drops = randi_range(1, 2)
 	elif survival_time < 35.0:
 		spawn_interval = 1.2
 		telegraph_duration = 1.0
@@ -54,7 +54,7 @@ func update_difficulty_curve() -> void:
 		spawn_interval = 0.5
 		telegraph_duration = 0.5
 		targeted_chance = 0.9
-		max_simultaneous_drops = 3
+		max_simultaneous_drops = randi_range(2,3)
 		
 	if abs(hazard_timer.wait_time - spawn_interval) > 0.1:
 		hazard_timer.wait_time = spawn_interval

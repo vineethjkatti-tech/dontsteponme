@@ -42,7 +42,7 @@ func start_telegraph() -> void:
 	t.tween_property(shadow, "scale", Vector2(1.0, 1.0), telegraph_time)
 	t.tween_property(shadow, "modulate:a", 0.9, telegraph_time)
 	
-	# Wait for telegraph to complete, then slam down
+	# wait for telegraph to complete, then slam down
 	await t.finished
 	slam_down()
 
@@ -84,7 +84,7 @@ func _check_near_miss() -> void:
 		
 		popup.setup("Close Call!", spawn_pos)
 		
-		# After popup.setup() call:
+		# after popup.setup() call:
 		print("  Popup instantiated: ", popup)
 		print("  Popup parent: ", popup.get_parent())
 		print("  Popup in tree: ", popup.is_inside_tree())
@@ -96,10 +96,17 @@ func slam_down() -> void:
 	var drop_tween := create_tween()
 	drop_tween.tween_property(boot, "position:y", 0.0, slam_duration).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
 	await drop_tween.finished
-	
 	trigger_impact()
 
 func trigger_impact() -> void:
+	# play audio before any awaits
+	var player:= AudioStreamPlayer2D.new()
+	player.stream = snd_stomp
+	player.bus = "SFX"
+	player.finished.connect(player.queue_free)
+	add_child(player)
+	player.play()
+	
 	# fetch current survival_time from the HUD
 	var current_time: float = 0.0
 	var hud = get_tree().get_first_node_in_group("hud")
@@ -110,15 +117,7 @@ func trigger_impact() -> void:
 	var cam = get_tree().get_first_node_in_group("camera")
 	if cam and cam.has_method("trigger_shoe_shake"):
 		cam.trigger_shoe_shake(current_time)
-		
-	# play stomp sound
-	var player := AudioStreamPlayer2D.new()
-	player.stream = snd_stomp
-	player.bus = "SFX"
-	player.finished.connect(player.queue_free)
-	add_child(player)
-	player.play()
-	
+			
 	boot.texture = tex_slam
 	hitbox.disabled = false
 	player_was_hit = false

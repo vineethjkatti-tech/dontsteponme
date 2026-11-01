@@ -1,11 +1,17 @@
 extends Node
 
+const SAVE_PATH: String = "user://highscore.save"
+
 # stores high score for that particular session
 var session_best = 0.0
+
+func _ready() -> void:
+	load_record()
 
 func try_update_record(time_survived: float) -> bool:
 	if time_survived > session_best:
 		session_best = time_survived
+		save_record()
 		return true
 	return false
 	
