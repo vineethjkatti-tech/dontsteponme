@@ -49,6 +49,10 @@ The **reshipped** version for **savepoint** can be accessed [here!](https://vine
 10. Apart from a strong stomp sound when a **shoe falls**, there is also a **screen shake** which sells the stomp and is **quite satisfying** I feel!!
 
 11. There are also **tween** and **flash effects** for many functions, like **curl reload** (_Cooldown HUD scales and reverts_), **Bug uncurl**, **Bug bounce on wall** (_while pinballing_) which are added to provide **attention to detail** and **user satisfaction**. _Make sure to check them out!!_
+    
+12. There is also a **near miss** function where if the **bug misses getting squashed** by the shoe while being near to the shoe, the bug gets a **speed boost for about 1.5s** and a **"close call!" popup appears and fades** above the bug. The speed boost is proportional to how close the miss was!! (_it will get more speed boost if it misses the shoe by less distance_).
+
+
 
 ## Declarations
 
