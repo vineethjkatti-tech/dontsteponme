@@ -15,6 +15,24 @@ func try_update_record(time_survived: float) -> bool:
 		return true
 	return false
 	
+func save_record() -> void:
+	var config := ConfigFile.new()
+	config.set_value("Records", "best_time", session_best)
+	var err := config.save(SAVE_PATH)
+	if err == OK:
+		print("------------Local High Score Saved!: %s ---" % format_time(session_best))	
+	else:
+		push_error("Failed to save high score! Error: %d" % err)
+		
+func load_record() -> void:
+	var config := ConfigFile.new()
+	var err := config.load(SAVE_PATH)
+	if err == OK:
+		session_best = config.get_value("Records", "best_time", 0.0)
+		print("----------Loaded High Score: %s----" % format_time(session_best))
+	else:
+		session_best = 0.0		
+		
 func format_time(seconds: float) -> String:
 	var total_sec := int(seconds)
 	var mins := total_sec / 60

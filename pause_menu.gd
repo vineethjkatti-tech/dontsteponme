@@ -38,6 +38,11 @@ func _ready() -> void:
 		var btn = buttons[i]
 		btn.mouse_entered.connect(_on_button_hovered.bind(i))
 		btn.focus_entered.connect(_on_button_hovered.bind(i))
+		
+	for btn in buttons:
+		btn.mouse_filter = Control.MOUSE_FILTER_PASS
+	
+	resume_button.grab_focus()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel") or event.is_action_pressed("pause"):

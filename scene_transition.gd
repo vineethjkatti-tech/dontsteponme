@@ -31,7 +31,7 @@ func reload_current_scene() -> void:
 	get_tree().reload_current_scene()
 	
 	var t_out = create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
-	t_out.tween_property(mat, "shader_parameter/process", 0.0, 0.4).set_trans(Tween.TRANS_SINE)
+	t_out.tween_property(mat, "shader_parameter/progess", 0.0, 0.4).set_trans(Tween.TRANS_SINE)
 	
 		
 		

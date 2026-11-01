@@ -7,7 +7,7 @@ extends CanvasLayer
 @onready var cursor: Label = $Cursor
 
 var buttons: Array[Button] = []
-var active_index = 0.0
+var active_index: int = 0
 var bob_tween: Tween
 
 func _ready() -> void:
@@ -16,7 +16,7 @@ func _ready() -> void:
 	cursor.visible = false
 	dimmer.modulate.a = 0.0
 	menu_container.modulate.a = 0.0
-	menu_container.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	menu_container.mouse_filter = Control.MOUSE_FILTER_PASS
 	
 	buttons = [retry_button, menu_button]
 	for i in range(buttons.size()):
@@ -34,7 +34,7 @@ func show_game_over() -> void:
 		AudioServer.set_bus_mute(sfx_index, true)
 	
 	print("--- show_game_over() CALLED! ---")
-	menu_container.mouse_filter = Control.MOUSE_FILTER_STOP
+	menu_container.mouse_filter = Control.MOUSE_FILTER_PASS
 	
 	# dim the background
 	var dim_tween := create_tween()
@@ -78,7 +78,7 @@ func _update_cursor_position(animated: bool) -> void:
 func _start_cursor_bob() -> void:
 	if bob_tween:
 		bob_tween.kill()
-	var base_x: = cursor.global_position.x
+	var base_x = cursor.global_position.x
 	bob_tween = create_tween().set_loops()
 	bob_tween.tween_property(cursor, "global_position:x", base_x - 3.0, 0.35).set_trans(Tween.TRANS_SINE)
 	bob_tween.tween_property(cursor, "global_position:x", base_x, 0.35).set_trans(Tween.TRANS_SINE)

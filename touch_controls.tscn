@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://cjelm4d6tr3nt"]
+
+[ext_resource type="Script" uid="uid://bt4qemi45n7fb" path="res://touch_controls.gd" id="1_1gcqp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5q4ah"]
+size = Vector2(40, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1gcqp"]
+size = Vector2(40, 40)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5q4ah"]
+radius = 20.0
+
+[node name="TouchControls" type="CanvasLayer" unique_id=1381104406]
+script = ExtResource("1_1gcqp")
+
+[node name="RootControl" type="Control" parent="." unique_id=1269772960]
+modulate = Color(1, 1, 1, 0.06666667)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BtnLeft" type="TouchScreenButton" parent="RootControl" unique_id=1340010714]
+modulate = Color(18.892157, 18.892157, 18.892157, 1)
+position = Vector2(16, 200)
+shape = SubResource("RectangleShape2D_5q4ah")
+action = "left"
+
+[node name="BtnRight" type="TouchScreenButton" parent="RootControl" unique_id=1620105746]
+modulate = Color(18.892157, 18.892157, 18.892157, 1)
+position = Vector2(66, 200)
+shape = SubResource("RectangleShape2D_1gcqp")
+passby_press = true
+action = "right"
+
+[node name="BtnCurl" type="TouchScreenButton" parent="RootControl" unique_id=1527885110]
+modulate = Color(18.892157, 18.892157, 18.892157, 1)
+position = Vector2(420, 200)
+shape = SubResource("CircleShape2D_5q4ah")
+passby_press = true
+action = "curl"

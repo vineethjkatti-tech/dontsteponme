@@ -58,7 +58,7 @@ func _check_near_miss() -> void:
 		boot_half_width = hitbox.shape.size.x / 2.0
 		
 		# measure edge to edge distance of boot from bug
-	var center_dist = abs(player.global_position.x - hitbox.global_position.x)
+	var center_dist = abs(player.global_position.x - boot.global_position.x)
 	var edge_dist = center_dist - boot_half_width
 	
 	print("DEBUG: shoe landed, edge distance to bug: ", snappedf(edge_dist, 0.1), "px")

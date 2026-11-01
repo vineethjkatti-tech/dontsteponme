@@ -47,16 +47,19 @@ layout_mode = 2
 
 [node name="ResumeButton" type="Button" parent="Control/Dimmer/CenterContainer/VBoxContainer" unique_id=1572317943]
 layout_mode = 2
+mouse_filter = 1
 text = "Resume"
 flat = true
 
 [node name="RestartButton" type="Button" parent="Control/Dimmer/CenterContainer/VBoxContainer" unique_id=341858665]
 layout_mode = 2
+mouse_filter = 1
 text = "Restart"
 flat = true
 
 [node name="MenuButton" type="Button" parent="Control/Dimmer/CenterContainer/VBoxContainer" unique_id=1079222764]
 layout_mode = 2
+mouse_filter = 1
 text = "Main menu"
 flat = true
 
