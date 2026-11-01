@@ -32,6 +32,29 @@ func _on_play_pressed() -> void:
 	get_tree().change_scene_to_file("res://main.tscn")
 
 func _on_quit_pressed() -> void:
+	# if currently in fullscreen mode, drop back to normal window mode
+	if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		
+	if OS.has_feature("web"):
+		# In a browser, exiting fullscreen brings the player back to the embedded itch frame.
+		# If you use the browser JavaScript bridge, you can also exit native document fullscreen:
+		if OS.has_feature("web"):
+			JavaScriptBridge.eval("""
+				if (document.fullscreenElement) {
+					document.exitFullscreen().catch(err => console.log(err));
+				}
+			""")
+		else:
+			# on windows / desktop exports, completely close the application
+			get_tree().quit()
+		
+		
+		
+		
+	
+	
+	
 	get_tree().quit()
 
 func _on_button_hovered(index: int) -> void:

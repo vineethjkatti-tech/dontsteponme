@@ -36,15 +36,31 @@ func _ready() -> void:
 
 	
 func start_telegraph() -> void:
-	# 1. Expand and darken shadow
+	# expand and darken shadow
 	var t := create_tween()
 	t.set_parallel(true)
 	t.tween_property(shadow, "scale", Vector2(1.0, 1.0), telegraph_time)
 	t.tween_property(shadow, "modulate:a", 0.9, telegraph_time)
 	
+	# schedule vuln flash  0.3s b4 boot drop
+	var warning_decay: float = maxf(0.0, telegraph_time - 0.3)
+	var warn_tween := create_tween()
+	warn_tween.tween_callback(_check_and_trigger_vuln_warning)
+	
 	# wait for telegraph to complete, then slam down
 	await t.finished
 	slam_down()
+
+func _check_and_trigger_vuln_warning() -> void:
+	var player = get_tree().get_first_node_in_group("player")
+	if not player or not is_instance_valid(player):
+		return
+	
+	# only pulse if bug is currently vulneranle (not curled)
+	if "is_curled" in player and not player.is_curled:
+		var warning_ui = get_tree().get_first_node_in_group("hazard_warning")
+		if warning_ui and warning_ui.has_method("trigger_vuln_flash"):
+			warning_ui.trigger_vuln_flash()
 
 func _check_near_miss() -> void:
 	var player = get_tree().get_first_node_in_group("player")

@@ -6,10 +6,14 @@ extends CanvasLayer
 @onready var restart_button: Button = $Control/Dimmer/CenterContainer/VBoxContainer/RestartButton
 @onready var menu_button: Button = $Control/Dimmer/CenterContainer/VBoxContainer/MenuButton
 @onready var cursor: Label = $Cursor
+@onready var music_button: Button = $Control/Dimmer/CenterContainer/VBoxContainer/MusicButton
+@onready var sfx_button: Button = $Control/Dimmer/CenterContainer/VBoxContainer/SFXButton
 
 # button array for index tracking
 @onready var buttons: Array[Button] = [
 	resume_button,
+	music_button,
+	sfx_button,
 	restart_button,
 	menu_button
 ]
@@ -20,6 +24,9 @@ var is_paused: bool = false
 var active_index: int = 0
 var bob_tween: Tween
 
+var music_bus_idx: int = -1
+var sfx_bus_idx: int = -1
+
 func _ready() -> void:
 	# keep this UI processing while the gameplay world physics and timers are frozen
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -27,11 +34,20 @@ func _ready() -> void:
 	control.visible = false
 	if cursor:
 		cursor.visible = false
+		
+	# cache audio bus indices
+	music_bus_idx = AudioServer.get_bus_index("Music")
+	sfx_bus_idx = AudioServer.get_bus_index("SFX")
+	
+	# populate buttons beforehand
+	_update_toggle_labels()
 	
 	# connect button click actions
 	resume_button.pressed.connect(resume_game)
 	restart_button.pressed.connect(_on_restart_pressed)
 	menu_button.pressed.connect(_on_menu_pressed)
+	music_button.pressed.connect(_toggle_music)
+	sfx_button.pressed.connect(_toggle_sfx)
 	
 	# connect hover (mouse) and focus (keyboard/gamepad) to move the cursor
 	for i in range(buttons.size()):
@@ -41,8 +57,6 @@ func _ready() -> void:
 		
 	for btn in buttons:
 		btn.mouse_filter = Control.MOUSE_FILTER_PASS
-	
-	resume_button.grab_focus()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel") or event.is_action_pressed("pause"):
@@ -85,6 +99,32 @@ func resume_game() -> void:
 		cursor.visible = false
 	if bob_tween:
 		bob_tween.kill()
+		
+func _toggle_music() -> void:
+	if music_bus_idx != -1:
+		var currently_muted := AudioServer.is_bus_mute(music_bus_idx)
+		AudioServer.set_bus_mute(music_bus_idx, !currently_muted)
+		_update_toggle_labels()
+		
+func _toggle_sfx() -> void:
+	if sfx_bus_idx != -1:
+		var currently_muted = AudioServer.is_bus_mute(sfx_bus_idx)
+		AudioServer.set_bus_mute(sfx_bus_idx, !currently_muted)
+		_update_toggle_labels()
+		
+func _update_toggle_labels() -> void:
+	if music_bus_idx != -1:
+		var is_music_muted := AudioServer.is_bus_mute(music_bus_idx)
+		music_button.text = "music: %s" % ("OFF" if is_music_muted else "ON")	
+	else:
+		music_button.text = "music: N/A"
+		
+	if sfx_bus_idx != -1:
+		var is_sfx_muted := AudioServer.is_bus_mute(sfx_bus_idx)
+		sfx_button.text = "sfx: %s" % ("OFF" if is_sfx_muted else "ON")
+	else:
+		sfx_button.text = "sfx: N/A"
+
 
 func _on_restart_pressed() -> void:
 	resume_game()

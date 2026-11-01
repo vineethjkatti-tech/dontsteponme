@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dpcxssnxagwrm" path="res://pause_menu.tscn" id="8_5vw27"]
 [ext_resource type="Script" uid="uid://p8ug6mxogqmr" path="res://camera_2d.gd" id="9_kek77"]
 [ext_resource type="PackedScene" uid="uid://cjelm4d6tr3nt" path="res://touch_controls.tscn" id="10_4c57u"]
+[ext_resource type="PackedScene" uid="uid://dioxmyli232py" path="res://hazard_warning_layer.tscn" id="11_efxa6"]
 
 [node name="Main" type="Node2D" unique_id=1555962016]
 
@@ -45,3 +46,5 @@ position = Vector2(240, 135)
 script = ExtResource("9_kek77")
 
 [node name="TouchControls" parent="." unique_id=1381104406 instance=ExtResource("10_4c57u")]
+
+[node name="HazardWarningLayer" parent="." unique_id=1609795630 instance=ExtResource("11_efxa6")]

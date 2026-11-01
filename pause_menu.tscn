@@ -51,6 +51,20 @@ mouse_filter = 1
 text = "Resume"
 flat = true
 
+[node name="MusicButton" type="Button" parent="Control/Dimmer/CenterContainer/VBoxContainer" unique_id=133146132]
+layout_mode = 2
+mouse_force_pass_scroll_events = false
+theme_override_font_sizes/font_size = 11
+text = "Music: on"
+flat = true
+
+[node name="SFXButton" type="Button" parent="Control/Dimmer/CenterContainer/VBoxContainer" unique_id=585724660]
+layout_mode = 2
+mouse_force_pass_scroll_events = false
+theme_override_font_sizes/font_size = 11
+text = "sfx: on"
+flat = true
+
 [node name="RestartButton" type="Button" parent="Control/Dimmer/CenterContainer/VBoxContainer" unique_id=341858665]
 layout_mode = 2
 mouse_filter = 1

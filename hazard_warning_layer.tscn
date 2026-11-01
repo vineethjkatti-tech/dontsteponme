@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dioxmyli232py"]
+
+[ext_resource type="Script" uid="uid://cd8cu4pqgsj1g" path="res://hazard_warning_layer.gd" id="1_05qt6"]
+
+[node name="HazardWarningLayer" type="CanvasLayer" unique_id=1609795630]
+layer = 15
+script = ExtResource("1_05qt6")
+
+[node name="FlashRect" type="ColorRect" parent="." unique_id=426691898]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 0, 0, 1)
