@@ -52,7 +52,7 @@ The **reshipped** version for **savepoint** can be accessed [here!](https://vine
     
 12. There is also a **near miss** function where if the **bug misses getting squashed** by the shoe while being near to the shoe, the bug gets a **speed boost for about 1.5s** and a **"close call!" popup appears and fades** above the bug. The speed boost is proportional to how close the miss was!! (_it will get more speed boost if it misses the shoe by less distance_).
 
-
+13. There is also **sound toggle** in pause menu where you can toggle **music** and **sfx** on and off!!
 
 ## Declarations
 
