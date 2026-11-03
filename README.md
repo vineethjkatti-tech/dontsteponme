@@ -24,7 +24,7 @@ When you are **curl** under a shoe you **goooo rollingg** in the opposite direct
 
 You can play the version submitted to the **jame gam game jam** [here!](https://vineethjkatti-tech.itch.io/dont-step-on-me)
 
-The **reshipped** version for **savepoint** can be accessed [here!](https://vineethjkatti-tech.itch.io/dont-step-on-me)
+The **reshipped** version for **savepoint** can be accessed [here!](https://vineethjkatti-tech.itch.io/dontsteponme)
 
 ## Features!!
 
